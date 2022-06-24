@@ -1,0 +1,17 @@
+{
+  "name": "Entertainment",
+  "version": "1.0.0",
+  "main": "ceres.js",
+  "scripts": {
+    "ready": "nodemon ceres.js"
+  },
+  "repository": "https://github.com/FelipeRodrigues05/ceres-bot.git",
+  "author": "FelipeRodrigues05",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^13.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  }
+}
