@@ -9,7 +9,10 @@
   "author": "FelipeRodrigues05",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^13.8.1"
+    "better-sqlite3": "^7.5.3",
+    "discord.js": "^13.8.1",
+    "moment": "^2.29.3",
+    "quick.db": "^9.0.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.18"

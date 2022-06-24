@@ -10,18 +10,21 @@ discordClient.commands = new Collection()
 discordClient.aliases = new Collection()
 discordClient.events = new Collection()
 
+// TODO: Conectar com algum banco de dados
+
+
 readdirSync(`./src/commands`).forEach((category) => {
   const commands = readdirSync(`./src/commands/${category}`).filter((command) => command.endsWith('.js'))
 
   for(let file of commands) {
     const command = require(`./src/commands/${category}/${file}`)
 
-    if(command.help.name) {
-      discordClient.commands.set(command.help.name, command)
-      console.log(`[COMMAND] File ${command.help.name} was loaded successfully`)
+    if(command.name) {
+      discordClient.commands.set(command.name, command)
+      console.log(`[COMMAND] File ${command.name} was loaded successfully`)
     } 
-    if(command.help.aliases && Array.isArray(command.help.aliases)) {
-      command.aliases.forEach(alias => discordClient.aliases.set(alias, command.help.name))
+    if(command.aliases && Array.isArray(command.aliases)) {
+      command.aliases.forEach(alias => discordClient.aliases.set(alias, command.name))
     }
   }
 })
