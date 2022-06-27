@@ -25,7 +25,6 @@ module.exports = {
 
     message.reply({ embeds: [successEmbed] }).then((err) => {
       db.deleteAll()
-      if (err) console.log(err);
     })
   }
 }

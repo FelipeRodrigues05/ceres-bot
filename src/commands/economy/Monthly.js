@@ -38,14 +38,11 @@ module.exports = {
     let successEmbed = new MessageEmbed()
       .setColor("GREEN")
       .setTitle("✅ | Bônus Mensal coletado com sucesso")
-      .addField({ name: `💰 Valor Recebido`, value: `\`\`\`js\n${formattedMoneyValue.format(monthlyMoney)}\`\`\`` })
+      .addField(`💰 Valor Recebido`, `\`\`\`js\n${formattedMoneyValue.format(monthlyMoney)}\`\`\`` )
       .setAuthor({ name: `${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true, size: 2048 }) })
       .setFooter({ text: `${discordClient.user.username}`, iconURL: discordClient.user.displayAvatarURL({ dynamic: true, size: 2048 }) })
 
-    message.reply({ embeds: [successEmbed] }).then((err) => {
-      if(err) return message.reply({ content: `Houve algum erro ao adicionar o dinheiro à sua conta`, ephemeral: true })
-      console.error(err);
-
+    message.reply({ embeds: [successEmbed] }).then(() => {
       db.add(`hand_money_${message.author.id}`, monthlyMoney)
     })
   }

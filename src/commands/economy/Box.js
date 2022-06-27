@@ -13,8 +13,8 @@ module.exports = {
     let prefix = await db.get(`prefix_${message.guild.id}`)
     if(!prefix) prefix = "ce!"
   
-    if (!cooldowns[message.author.id]) cooldowns[message.author.id] = { lastCMD: null }
-    let lastCommand = cooldowns[message.author.id].lastCMD
+    if (!cooldowns[message.author.id]) cooldowns[message.author.id] = { lastCMD: null } // SEM COMANDOS
+    let lastCommand = cooldowns[message.author.id].lastCMD // +1 LAST COMMAND
     let timeout = ms("5m")
     if (lastCommand !== null && timeout - (Date.now() - lastCommand) > 0) {
       let time = ms(timeout - (Date.now() - lastCommand))
@@ -43,7 +43,7 @@ module.exports = {
       if(err) return message.reply({ content: `Houve algum erro ao adicionar o dinheiro à sua conta`, ephemeral: true })
       console.error(err);
 
-      db.add(`hand_money_${message.author.id}`, 1)
+      db.add(`boxes_${message.author.id}`, 1)
     })
   }
 }

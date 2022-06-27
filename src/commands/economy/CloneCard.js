@@ -40,14 +40,11 @@ module.exports = {
       .setColor("GREEN")
       .setTitle("✅ | O cara dos Cartão Clonado")
       .setDescription(`Você clonou o cartão do Zé com sucesso`)
-      .addField({ name: `💰 Dinheiro no Cartão`, value: `\`\`\`js\n${formattedMoneyValue.format(ccMoney)}\`\`\`` })
+      .addField(`💰 Dinheiro no Cartão`,`\`\`\`js\n${formattedMoneyValue.format(ccMoney)}\`\`\`` )
       .setAuthor({ name: `${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true, size: 2048 }) })
       .setFooter({ text: `${discordClient.user.username}`, iconURL: discordClient.user.displayAvatarURL({ dynamic: true, size: 2048 }) })
 
     message.reply({ embeds: [successEmbed] }).then((err) => {
-      if(err) return message.reply({ content: `Houve algum erro ao adicionar o dinheiro à sua conta`, ephemeral: true })
-      console.error(err);
-
       db.add(`hand_money_${message.author.id}`, ccMoney)
     })
   }

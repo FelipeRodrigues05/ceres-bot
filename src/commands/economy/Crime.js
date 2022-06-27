@@ -40,14 +40,11 @@ module.exports = {
       .setColor("GREEN")
       .setTitle("✅ | Roubo Efetuado com sucesso")
       .setDescription("Você roubou a velhinha na esquina e não foi pego")
-      .addField({ name: `💰 Valor Roubado`, value: `\`\`\`js\n${formattedMoneyValue.format(crimeMoney)}\`\`\`` })
+      .addField(`💰 Valor Roubado`, `\`\`\`js\n${formattedMoneyValue.format(crimeMoney)}\`\`\`` )
       .setAuthor({ name: `${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true, size: 2048 }) })
       .setFooter({ text: `${discordClient.user.username}`, iconURL: discordClient.user.displayAvatarURL({ dynamic: true, size: 2048 }) })
 
-    message.reply({ embeds: [successEmbed] }).then((err) => {
-      if(err) return message.reply({ content: `Houve algum erro ao adicionar o dinheiro à sua conta`, ephemeral: true })
-      console.error(err);
-
+    message.reply({ embeds: [successEmbed] }).then(() => {
       db.add(`hand_money_${message.author.id}`, crimeMoney)
     })
   }

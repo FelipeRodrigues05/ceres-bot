@@ -36,6 +36,7 @@ module.exports = {
       style: 'currency',
       maximumSignificantDigits: 2
     })
+    
     let hasWorkEmbed = new MessageEmbed()
       .setColor("RED")
       .setTitle("❌ | Desempregado")

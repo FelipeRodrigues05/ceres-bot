@@ -12,7 +12,6 @@ discordClient.events = new Collection()
 
 // TODO: Conectar com algum banco de dados
 
-
 readdirSync(`./src/commands`).forEach((category) => {
   const commands = readdirSync(`./src/commands/${category}`).filter((command) => command.endsWith('.js'))
 

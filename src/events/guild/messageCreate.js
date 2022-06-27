@@ -8,7 +8,7 @@ module.exports.help = {
 
 discordClient.on('messageCreate', async (message) => {
   let prefix = await db.get(`prefix_${message.guild.id}`)
-  if(!prefix) prefix = "ce!"
+  if (!prefix) prefix = "ce!"
 
   if (message.channel.type === "DM" || message.author.bot) return;
   if (!message.content.startsWith(prefix)) return // Se a mensagem não começa com prefixo, o Cliente não faz nada
@@ -22,4 +22,5 @@ discordClient.on('messageCreate', async (message) => {
   if (commands) {
     commands.run(discordClient, message, args);
   }
+
 })

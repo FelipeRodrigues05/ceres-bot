@@ -49,6 +49,7 @@ module.exports = {
       console.error(err);
 
       db.add(`hand_money_${message.author.id}`, boxMoney)
+      db.sub(`boxes_${message.author.id}`, 1)
     })
   }
 }

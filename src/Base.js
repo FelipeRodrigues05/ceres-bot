@@ -7,7 +7,7 @@ module.exports = {
   aliases: [''],
 
   run: async (discordClient, message, args) => {
-    
+
     // COOLDOWN
     cooldowns = {}
 
@@ -36,6 +36,9 @@ module.exports = {
       style: 'currency',
       maximumSignificantDigits: 2
     })
+
+    let user = message.mentions.users.first()
+
 
   }
 }
