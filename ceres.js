@@ -1,5 +1,5 @@
 const { Client, Collection } = require("discord.js")
-const discordClient = new Client({ intents: 32767 })
+const discordClient = new Client({ intents: 32767, partials: ['GUILD_MEMBER', 'CHANNEL', 'MESSAGE', 'REACTION', 'USER'] })
 const { token } = require("./config.json")
 const { readdirSync } = require("fs")
 

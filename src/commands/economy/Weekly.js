@@ -1,16 +1,14 @@
 const { MessageEmbed } = require("discord.js")
 const { QuickDB } = require("quick.db")
 const db = new QuickDB()
+const ms = require("ms")
+cooldowns = {}
 
 module.exports = {
-  name: "",
-  aliases: [''],
+  name: "daily",
+  aliases: ['diario'],
 
   run: async (discordClient, message, args) => {
-    
-    // COOLDOWN
-    cooldowns = {}
-
     if (!cooldowns[message.author.id]) cooldowns[message.author.id] = { lastCMD: null }
     let lastCommand = cooldowns[message.author.id].lastCMD
     let timeout = ms("7 day")
@@ -30,12 +28,25 @@ module.exports = {
       message.reply({ embeds: [remainingTimeEmbed], ephemeral: true })
     }
 
-    // FORMATAÇÃO DO MONEY
     const formattedMoneyValue = new Intl.NumberFormat('pt-BR', {
       currency: 'BRL',
       style: 'currency',
       maximumSignificantDigits: 2
     })
 
+    let weeklyMoney = Math.ceil(Math.random() * (5000 * 4))
+    let successEmbed = new MessageEmbed()
+      .setColor("GREEN")
+      .setTitle("✅ | Bônus Semanal coletado com sucesso")
+      .addField({ name: `💰 Valor Recebido`, value: `\`\`\`js\n${formattedMoneyValue.format(weeklyMoney)}\`\`\`` })
+      .setAuthor({ name: `${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true, size: 2048 }) })
+      .setFooter({ text: `${discordClient.user.username}`, iconURL: discordClient.user.displayAvatarURL({ dynamic: true, size: 2048 }) })
+
+    message.reply({ embeds: [successEmbed] }).then((err) => {
+      if(err) return message.reply({ content: `Houve algum erro ao adicionar o dinheiro à sua conta`, ephemeral: true })
+      console.error(err);
+
+      db.add(`hand_money_${message.author.id}`, weeklyMoney)
+    })
   }
 }

@@ -3,8 +3,8 @@ const { QuickDB } = require("quick.db")
 const db = new QuickDB()
 
 module.exports = {
-  name: "setPrefix",
-  aliases: ['setprefix', 'prefixo'],
+  name: "resetDb",
+  aliases: ['reset'],
 
   run: async (discordClient, message, args) => {
 
@@ -17,24 +17,15 @@ module.exports = {
 
     if(!message.member.permissions.has("ADMINISTRATOR")) return message.reply({ embeds: [missingPermsEmbed], ephemeral: true})
 
-    let missingArgumentsEmbed = new MessageEmbed()
-      .setColor("RED")
-      .setTitle("❌ | Falta de argumentos")
-      .setDescription(`Você precisa colocar o prefixo`)
-      .setFooter({ text: `Requisitado Por: ${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true, size: 2048 }) })
-      .setTimestamp()
-
-    let prefix = args[0]
-    if (!prefix) return message.reply({ embeds: [missingArgumentsEmbed] })
-
     let successEmbed = new MessageEmbed()
       .setColor("#6714cc")
       .setAuthor({ name: `${message.guild.name}`, iconURL: message.guild.iconURL({ dynamic: true, size: 2048 }) })
-      .setDescription(`Novo Prefixo: *${prefix}*`)
+      .setDescription(`Banco de Dados resetado com sucesso`)
       .setFooter({ text: `Requisitado Por: ${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true, size: 2048 }) })
 
-      message.reply({ embeds: [successEmbed] }).then(() => {
-        db.set(`prefix_${message.guild.id}`, prefix)
-      })
+    message.reply({ embeds: [successEmbed] }).then((err) => {
+      db.deleteAll()
+      if (err) console.log(err);
+    })
   }
 }

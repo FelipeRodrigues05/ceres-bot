@@ -6,6 +6,7 @@ module.exports.help = {
 }
 
 discordClient.on('ready', () => {
+  
   discordClient.user.setPresence({ activities: [
     { name: `Use ${prefix}help para obter ajuda`, type: "PLAYING" }, 
     { name: "Desenvolvido por Fehzin' 41", type: "PLAYING" }],
